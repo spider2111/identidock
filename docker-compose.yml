@@ -1,4 +1,13 @@
 services:
+  proxy:
+    image: proxy:0.1
+    ports:
+      - "80:80"
+    links:
+      - "identidock"
+    environment:
+      - NGINX_HOST=172.17.88.169
+      - NGINX_PROXY=http://identidock:9090
   identidock:
     build: .
     ports: 
