@@ -6,7 +6,7 @@ pipeline {
             stage("Docker image build") {      
                 steps {
                         sh "whoami"
-                        sh "docker build -t pipeline:${env.BUILD_TAG} ."
+                        sh "docker build -t pipeline:${env.GIT_COMMIT} ."
                 }
             }
         }
