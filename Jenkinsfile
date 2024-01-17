@@ -3,12 +3,10 @@ pipeline {
         label '167-vm'
     }
         stages {
-            stage ("Docker image build") {
-                
+            stage("Docker image build") {      
                 steps {
                         sh "whoami"
-                        sh "docker build -t pipeline::${BUILD_TIMESTAMP} ."
-
+                        sh "docker build -t pipeline:${BUILD_TIMESTAMP} ."
                 }
             }
         }
