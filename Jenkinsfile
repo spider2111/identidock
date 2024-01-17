@@ -4,9 +4,15 @@ pipeline {
     }
         stages {
             stage ("Docker image build") {
+                
                 steps {
-                    sh "whoami"
-                    sh "docker build -t pipeline:image ."
+                    scripts {
+                        def commitSha = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                        sh "whoami"
+                        sh "docker build -t pipeline:${commitSha} ."
+
+                    }
+
                 }
             }
         }
