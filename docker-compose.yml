@@ -7,7 +7,7 @@ services:
     links:
       - "identidock"
     environment:
-      - NGINX_HOST=172.17.88.167
+      - NGINX_HOST="$IP"
       - NGINX_PROXY=http://identidock:9090
   identidock:
     image: spider2111/identidock-feature:test
