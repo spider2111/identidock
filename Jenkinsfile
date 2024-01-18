@@ -10,7 +10,7 @@ pipeline {
             stage("Docker image build") {      
                 steps {
                         sh "whoami"
-                        sh "docker build -t ${env.REGISTRY}:${env.GIT_COMMIT} ."
+                        sh "docker build -t ${env.REGISTRY}:${BUILD_TIMESTAMP}. ."
                     }
                 }
             stage("Login to dockerhub") {
@@ -22,8 +22,8 @@ pipeline {
 
             stage("Push image") {
                 steps {
-                    sh "docker push ${env.REGISTRY}:${env.GIT_COMMIT}"
-                    sh "docker tag ${env.REGISTRY}:${env.GIT_COMMIT} ${env.REGISTRY}:test"
+                    sh "docker push ${env.REGISTRY}:${BUILD_TIMESTAMP}."
+                    sh "docker tag ${env.REGISTRY}:${BUILD_TIMESTAMP}. ${env.REGISTRY}:test"
                     sh "docker push ${env.REGISTRY}:test"
                 }
             }        
