@@ -1,15 +1,16 @@
+version: "3.5"
 services:
   proxy:
-    image: proxy:0.1
+    image: sider2111/proxy:0.1
     ports:
       - "80:80"
     links:
       - "identidock"
     environment:
-      - NGINX_HOST=172.17.88.169
+      - NGINX_HOST=172.17.88.167
       - NGINX_PROXY=http://identidock:9090
   identidock:
-    build: .
+    image: ${env.REGISTRY}:${env.GIT_COMMIT}
     ports: 
       - "9090:9090"
     environment:
