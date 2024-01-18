@@ -35,11 +35,11 @@ pipeline {
               }
             }
 
-            stage("Pinging ansible")
+            stage("Pinging ansible") {
                 steps {
                     sh 'ansible --version'
                 }
-
+            }
 
         }
 
