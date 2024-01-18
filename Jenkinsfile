@@ -31,7 +31,7 @@ pipeline {
             stage("Building a testing docker compose") {
                 steps {
                 sh 'docker compose up -d'
-                sh 'docker compose stop && docker compose rm'
+                sh 'docker compose stop && docker compose rm -fv'
               }
             }
 
