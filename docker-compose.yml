@@ -1,7 +1,7 @@
 version: "3.5"
 services:
   proxy:
-    image: sider2111/proxy:0.1
+    image: spider2111/proxy:0.1
     ports:
       - "80:80"
     links:
