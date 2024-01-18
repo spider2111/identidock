@@ -15,8 +15,7 @@ pipeline {
                 }
             stage("Login to dockerhub") {
                 steps {
-                    sh "echo ${env.REGISTRY_CREDENTIALS_PSW} | docker login - ${env.REGISTRY_CREDENTIALS_USR} --pasword-stdin"
-
+                    sh "echo $env.REGISTRY_CREDENTIALS_PSW | docker login - $env.REGISTRY_CREDENTIALS_USR --pasword-stdin"
                 }
 
             }
