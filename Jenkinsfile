@@ -25,6 +25,11 @@ pipeline {
                     sh "docker push ${env.REGISTRY}:${env.GIT_COMMIT}"
                 }
             }        
+
+            stage("Deploy docker compose") {
+                sh 'docker compose up -d'
+            }
+
         }
 
     post {
