@@ -10,7 +10,7 @@ services:
       - NGINX_HOST=172.17.88.167
       - NGINX_PROXY=http://identidock:9090
   identidock:
-    image: ${env.REGISTRY}:${env.GIT_COMMIT}
+    build: .
     ports: 
       - "9090:9090"
     environment:
