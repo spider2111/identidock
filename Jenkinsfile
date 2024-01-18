@@ -23,12 +23,15 @@ pipeline {
             stage("Push image") {
                 steps {
                     sh "docker push ${env.REGISTRY}:${env.GIT_COMMIT}"
+                    sh "docker tag ${env.REGISTRY}:${env.GIT_COMMIT} ${env.REGISTRY}:test"
+                    sh "docker push ${env.REGISTRY}:test"
                 }
             }        
 
-            stage("Deploy docker compose") {
+            stage("Deploy a testing docker compose") {
               steps {
                 sh 'docker compose up -d'
+                sh 'docker compose stop && docker compose rm'
               }
             }
 
