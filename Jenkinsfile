@@ -1,13 +1,36 @@
 pipeline {
-    agent {
-        label '167-vm'
+    environment {
+        REGISTRY="spider2111/identidock-feature"
+        REGISTRY_CREDENTIALS = credentials('dockerhub')
     }
-        stages {
-            stage ("Docker image build") {
-                steps {
-                    sh "whoami"
-                    sh "docker build -t pipeline:image ."
-                }
-            }
+        agent {
+            label '167-vm'
         }
-}
+        stages {
+            stage("Docker image build") {      
+                steps {
+                        sh "whoami"
+                        sh "docker build -t ${env.REGISTRY}:${env.GIT_COMMIT} ."
+                    }
+                }
+            stage("Login to dockerhub") {
+                steps {
+                    sh('echo $REGISTRY_CREDENTIALS_PSW | docker login -u $REGISTRY_CREDENTIALS_USR --password-stdin')
+                }
+
+            }
+
+            stage("Push image") {
+                steps {
+                    sh "docker push ${env.REGISTRY}:${env.GIT_COMMIT}"
+                }
+            }        
+        }
+
+    post {
+        always {
+            sh 'docker logout'
+        }
+    }
+} 
+ 
