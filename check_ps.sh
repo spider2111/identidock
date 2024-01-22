@@ -9,5 +9,5 @@ set -e
 
 checker="$(docker ps) | grep -c identidock"
 if [[ $checker -gt 0  ]]; then
-    docker compose stop && docker compose rm
+    docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
 fi
