@@ -35,16 +35,17 @@ pipeline {
               }
             }
 
-            stage("Pinging ansible") {
+            stage("Copying docker compose file") {
                 steps {
-                    sh 'ansible --version'
-                    sh 'su admin'
-                    sh 'ls -lha'
                     sh 'cp ./docker-compose.yml /etc/ansible/ '
                     sh 'cd /etc/ansible &&  ansible-playbook run_docker_compose_playbook.yml --extra-vars "ansible_sudo_pass=stk12345"'
-
                 }
             }
+            stage("Deply to stage server") {
+                steps {
+                    sh 'cd /etc/ansible &&  ansible-playbook run_docker_compose_playbook.yml --extra-vars "ansible_sudo_pass=stk12345"'
+                }
+            }  
 
         }
 
