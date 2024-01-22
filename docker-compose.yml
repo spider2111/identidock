@@ -1,6 +1,7 @@
 version: "3.5"
 services:
   proxy:
+    container_name: nginx_proxy
     image: spider2111/proxy:0.1
     ports:
       - "80:80"
@@ -10,13 +11,12 @@ services:
       - NGINX_HOST=172.17.88.140
       - NGINX_PROXY=http://identidock:9090
   identidock:
+    container_name: identidock
     image: spider2111/identidock-feature:test
     ports: 
       - "9090:9090"
     environment:
       ENV: PROD
-#    volumes:
-#      - ./app:/app
     links:
       - "dnmonster"
       - "redis"
