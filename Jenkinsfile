@@ -43,7 +43,7 @@ pipeline {
                     sh 'cd /etc/ansible &&  ansible-playbook run_docker_compose_playbook.yml --extra-vars "ansible_sudo_pass=stk12345"'
                 }
             }
-            stage("Deply to stage server") {
+            stage("Deploy to stage server") {
                 steps {
                     sh 'cd /etc/ansible &&  ./scripts/check_ps.sh'
                 }
