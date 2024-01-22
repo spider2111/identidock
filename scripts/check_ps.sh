@@ -14,8 +14,7 @@ touch output.txt
 checker=$(docker ps)
 echo "$checker" > "$output"
 string=$(cat "$output" | grep -c identidock)
-echo "$string" 
-if [[ $string -gt 1  ]]; then
+if [[ $string -gt 0  ]]; then
     docker stop $(docker ps -aq)
     docker rm $(docker ps -aq)
     rm -rf $output
