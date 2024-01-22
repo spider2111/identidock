@@ -37,9 +37,9 @@ pipeline {
 
             stage("Copying docker compose file") {
                 steps {
+                    sh 'su admin'
                     sh 'cp ./docker-compose.yml /etc/ansible/ && chown admin:admin /etc/ansible/docker-compose.yml '
                     sh 'cp ./check_ps.sh /etc/ansible/ && chown admin:admin /etc/ansible/check_ps.sh '
-                    sh 'su admin'
                 }
             }
             stage("Deploy to stage server") {
