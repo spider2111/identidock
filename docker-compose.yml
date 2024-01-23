@@ -32,10 +32,12 @@ services:
     restart: always
   
   dnmonster:
+    container_name: dnmonster
     image: amouat/dnmonster:1.0
     restart: always
   
   
   redis:
+    container_name: redis
     image: redis:3.0
     restart: always
