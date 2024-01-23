@@ -27,14 +27,6 @@ pipeline {
                     sh "docker push ${env.REGISTRY}:test"
                 }
             }        
-
-            stage("Building a testing docker compose") {
-                steps {
-                sh 'docker compose up -d'
-                sh 'docker compose stop && docker compose rm -fv'
-              }
-            }
-
             stage("Copying docker compose file") {
                 steps {
                     sh 'su admin'
@@ -42,7 +34,7 @@ pipeline {
                     sh 'cp ./check_ps.sh /etc/ansible/ && chown admin:admin /etc/ansible/check_ps.sh '
                 }
             }
-            stage("Deploy to stage server") {
+            stage("Deploy to test server") {
                 steps {
                     sh 'cd /etc/ansible && ansible-playbook run_docker_compose_playbook.yml --extra-vars "ansible_sudo_pass=stk12345"' // Если хочу через compose | Рабочее
                     sh ' rm check_ps.sh'
