@@ -38,8 +38,10 @@ pipeline {
             }
             stage("Deploy to test server") {
                 steps {
-                    sh 'cd /etc/ansible && ansible-playbook run_docker_compose_playbook.yml --extra-vars "ansible_sudo_pass=stk12345"' // Если хочу через compose | Рабочее
-                    sh ' rm check_ps.sh'
+                    sh 'cd /etc/ansible && ansible-playbook testing_cd_playbook.yml --extra-vars "ansible_sudo_pass=stk12345"' // Если хочу через compose | Рабочее
+                    sh ' rm -f check_ps.sh'
+                    sh ' rm -f rtt.sh '
+                    sh ' rm -f load_test.sh'
                 }
                 
             }  
