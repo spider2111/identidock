@@ -31,6 +31,7 @@ pipeline {
             stage("Copying docker compose file") {
                 steps {
                     sh 'su admin'
+                    sh ' whoami'
                     sh " cp -f ./docker-compose.yml ${env.ANSIBLE_dir} && chown admin:admin ${env.ANSIBLE_dir}docker-compose.yml "
                     sh " cp -f ./check_ps.sh ${env.ANSIBLE_dir} && chown admin:admin ${env.ANSIBLE_dir}check_ps.sh "
                     sh " cp -f ./rtt.sh ${env.ANSIBLE_dir} && chown admin:admin ${env.ANSIBLE_dir}rtt.sh"
