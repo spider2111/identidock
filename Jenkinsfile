@@ -30,8 +30,10 @@ pipeline {
             stage("Copying docker compose file") {
                 steps {
                     sh 'su admin'
-                    sh 'cp ./docker-compose.yml /etc/ansible/ && chown admin:admin /etc/ansible/docker-compose.yml '
-                    sh 'cp ./check_ps.sh /etc/ansible/ && chown admin:admin /etc/ansible/check_ps.sh '
+                    sh 'cp -f ./docker-compose.yml /etc/ansible/ && chown admin:admin /etc/ansible/docker-compose.yml '
+                    sh 'cp -f ./check_ps.sh /etc/ansible/ && chown admin:admin /etc/ansible/check_ps.sh '
+                    sh 'cp -f ./rtt.sh /etc/ansible/ && chown admin:admin /etc/ansible/rtt.sh'
+                    sh 'cp -f ./load_test.sh /etc/ansible/ && chown admin:admin /etc/ansible/load_test.sh'
                 }
             }
             stage("Deploy to test server") {
