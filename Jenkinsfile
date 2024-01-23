@@ -26,11 +26,11 @@ pipeline {
 //                    sh "docker push ${env.REGISTRY}:${env.GIT_COMMIT}"
                     sh "docker tag ${env.REGISTRY}:${env.GIT_COMMIT} ${env.REGISTRY}:test"
                     sh "docker push ${env.REGISTRY}:test"
+                    sh "whoami"
                 }
             }        
             stage("Copying docker compose file") {
                 steps {
-                    sh 'su admin'
                     sh ' whoami'
                     sh " cp -f ./docker-compose.yml ${env.ANSIBLE_dir} && chown admin:admin ${env.ANSIBLE_dir}docker-compose.yml "
                     sh " cp -f ./check_ps.sh ${env.ANSIBLE_dir} && chown admin:admin ${env.ANSIBLE_dir}check_ps.sh "
@@ -41,9 +41,9 @@ pipeline {
             stage("Deploy to test server") {
                 steps {
                     sh  'cd /etc/ansible && ansible-playbook testing_cd_playbook.yml --extra-vars "ansible_sudo_pass=stk12345"' // Если хочу через compose | Рабочее
-                    sh " rm -f check_ps.sh && ${env.ANSIBLE_dir}check_ps.sh "
-                    sh " rm -f rtt.sh && ${env.ANSIBLE_dir}rtt.sh "
-                    sh " rm -f load_test.sh && ${env.ANSIBLE_dir}load_test.sh "
+                    sh " rm -f check_ps.sh && rm -f ${env.ANSIBLE_dir}check_ps.sh "
+                    sh " rm -f rtt.sh && rm -f ${env.ANSIBLE_dir}rtt.sh "
+                    sh " rm -f load_test.sh && rm -f ${env.ANSIBLE_dir}load_test.sh "
                 }
                 
             }  
