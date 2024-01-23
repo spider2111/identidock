@@ -1,5 +1,6 @@
 version: "3.5"
 services:
+
   proxy:
     container_name: nginx_proxy
     image: spider2111/proxy:0.1
@@ -10,6 +11,11 @@ services:
     environment:
       - NGINX_HOST=172.17.88.140
       - NGINX_PROXY=http://identidock:9090
+    depends_on:
+      - identidock
+      - dnmonster
+      - redis
+    restart: always
   identidock:
     container_name: identidock
     image: spider2111/identidock-feature:test
@@ -20,9 +26,16 @@ services:
     links:
       - "dnmonster"
       - "redis"
+    depends_on:
+      - dnmonster
+      - redis
+    restart: always
   
   dnmonster:
     image: amouat/dnmonster:1.0
+    restart: always
+  
   
   redis:
     image: redis:3.0
+    restart: always
