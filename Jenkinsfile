@@ -37,6 +37,7 @@ pipeline {
                     sh " cp -f ./check_ps.sh ${env.ANSIBLE_dir} && chown admin:admin ${env.ANSIBLE_dir}check_ps.sh "
                     sh " cp -f ./rtt.sh ${env.ANSIBLE_dir} && chown admin:admin ${env.ANSIBLE_dir}rtt.sh"
                     sh " cp -f ./load_test.sh ${env.ANSIBLE_dir} && chown admin:admin ${env.ANSIBLE_dir}load_test.sh"
+                    sh "cp -f ./docker-compose-stage.yml ${env.ANSIBLE_dir} && chown admin:admin ${env.ANSIBLE_r}docker-compose-stage.yml"
                 }
             }
             stage("Deploy to test server") {
