@@ -33,7 +33,7 @@ pipeline {
             stage("Copying docker compose file") {
                 steps {
                     sh ' whoami'
-                    sh " cp -f ./docker-compose.yml ${env.ANSIBLE_dir} && chown admin:admin ${env.ANSIBLE_dir}docker-compose.yml "
+                    sh " cp -f ./docker-compose.yml ${env.ANSIBLE_dir} && chown admin:admin ${env.ANSIBLE_r}docker-compose.yml "
                     sh " cp -f ./check_ps.sh ${env.ANSIBLE_dir} && chown admin:admin ${env.ANSIBLE_dir}check_ps.sh "
                     sh " cp -f ./rtt.sh ${env.ANSIBLE_dir} && chown admin:admin ${env.ANSIBLE_dir}rtt.sh"
                     sh " cp -f ./load_test.sh ${env.ANSIBLE_dir} && chown admin:admin ${env.ANSIBLE_dir}load_test.sh"
@@ -48,6 +48,12 @@ pipeline {
                 }
                 
             }  
+
+            stage("Deploy ti stage cluster") {
+                steps {
+                    sh 'cd /etc/ansible && ansible-playbook staging_cd_playbook.yml --extra-vars $ANSIBLE_ENV ' 
+                }
+            }
 
         }
 

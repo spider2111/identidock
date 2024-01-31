@@ -1,0 +1,74 @@
+version: "3.5"
+
+services:
+  
+  traefik:
+    image: traefik:latest
+    volumes:
+      - "./traefik/traefik.yml:/etc/traefik/traefik.yml:ro"
+      - "./traefik/conf.d/dynamic_conf.yml:/etc/traefik/conf.d/dynamic_conf.yml:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    ports:
+      - "80:80"
+      - "443"
+      - "8080:8080"
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager 
+  
+  nginx:
+    
+    image: spider2111/proxy:0.1
+    environment:
+      - NGINX_PROXY=http://identidock_identidock:9090
+      - NGINX_HOST=172.17.88.139
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+    networks:
+      - proxy
+      - identidock
+    deploy:
+      replicas: 2
+
+  identidock:
+    image: spider2111/identidock-feature:test
+    networks:
+      - identidock
+    environment:
+      ENV: PROD
+    deploy:
+      replicas: 2
+  
+  dnmonster:
+    image: amouat/dnmonster:1.0
+    networks:
+      - identidock
+    deploy:
+      replicas: 2
+  
+  redis:
+    image: redis:3.0
+    networks:
+      - identidock
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+  
+  drill:
+    image: spider2111/alpine:drill
+    networks:
+      - identidock
+    command: ["sleep", "1000000000"]
+    deploy:
+      replicas: 2
+networks:
+  proxy:
+    external: true
+  identidock:
+    external: false
