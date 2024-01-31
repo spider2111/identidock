@@ -24,7 +24,7 @@ services:
     
     image: spider2111/proxy:0.1
     environment:
-      - NGINX_PROXY=http://identidock_identidock:9090
+      - NGINX_PROXY=http://identidock:9090
       - NGINX_HOST=172.17.88.139
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
