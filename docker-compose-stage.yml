@@ -5,8 +5,8 @@ services:
   traefik:
     image: traefik:latest
     volumes:
-      - "/home/admin/identidock/traefik/traefik/traefik.yml:/etc/traefik/traefik.yml:ro"
-      - "/home/admin/identidock/traefik/traefik/conf.d/dynamic_conf.yml:/etc/traefik/conf.d/dynamic_conf.yml:ro"
+      - "/home/admin/identidock/traefik/traefik.yml:/etc/traefik/traefik.yml:ro"
+      - "/home/admin/identidock/traefik/conf.d/dynamic_conf.yml:/etc/traefik/conf.d/dynamic_conf.yml:ro"
       - "/etc/localtime:/etc/localtime:ro"
     ports:
       - "80:80"
