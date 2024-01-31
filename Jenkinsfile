@@ -53,6 +53,9 @@ pipeline {
             stage("Deploy to stage cluster") {
                 steps {
                     sh 'cd /etc/ansible && ansible-playbook staging_cd_playbook.yml --extra-vars $ANSIBLE_ENV ' 
+                    sh " rm -f check_ps.sh && rm -f ${env.ANSIBLE_dir}check_ps.sh "
+                    sh " rm -f rtt.sh && rm -f ${env.ANSIBLE_dir}rtt.sh "
+                    sh " rm -f load_test.sh && rm -f ${env.ANSIBLE_dir}load_test.sh "
                 }
             }
 
