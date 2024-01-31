@@ -50,7 +50,7 @@ pipeline {
                 
             }  
 
-            stage("Deploy ti stage cluster") {
+            stage("Deploy to stage cluster") {
                 steps {
                     sh 'cd /etc/ansible && ansible-playbook staging_cd_playbook.yml --extra-vars $ANSIBLE_ENV ' 
                 }
