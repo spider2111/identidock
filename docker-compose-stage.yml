@@ -49,7 +49,7 @@ services:
   #      constraints:
   #        - node.role == manager 
     healthcheck:
-      test: wget -qT5 --spider http://127.0.0.1:80/system/health
+      test: wget -qT5 --spider http://127.0.0.1:9090/system/health
       interval: 10s
       retries: 3
       start_period: 60s
@@ -67,7 +67,7 @@ services:
       replicas: 2
     
     healthcheck:
-      test: wget -qT5 --spider http://127.0.0.1:9090/system/health
+      test: wget -qT5 --spider http://127.0.0.1:8080/system/health
       interval: 10s
       retries: 3
       start_period: 60s
@@ -85,12 +85,7 @@ services:
       placement:
         constraints:
           - node.role == manager
-    healthcheck:
-      test: wget -qT5 --spider http://127.0.0.1:9090/system/health
-      interval: 10s
-      retries: 3
-      start_period: 60s
-      timeout: 5s
+
   
   drill:
     image: spider2111/alpine:driller
@@ -99,12 +94,7 @@ services:
     command: ["sleep", "1000000000"]
     deploy:
       replicas: 2
-    healthcheck:
-      test: wget -qT5 --spider http://127.0.0.1:9090/system/health
-      interval: 10s
-      retries: 3
-      start_period: 60s
-      timeout: 5s
+
    #   placement:
    #     constraints:
    #       - node.role == manager 
