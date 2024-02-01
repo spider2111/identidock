@@ -21,6 +21,19 @@ services:
       placement:
         constraints:
           - node.role == manager 
+      update_config:
+        parallelism: 1
+        order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
   
   nginx:
     
@@ -35,11 +48,25 @@ services:
       - backend
     deploy:
       replicas: 2
+      update_config:
+        parallelism: 1
+        order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: curl -sS http://127.0.0.1:4004/ptm/api/healthcheck || echo 1
       interval: 30s
       timeout: 3s
       retries: 12
+      
 #      placement:
 #        constraints:
 #          - node.role == manager 
@@ -52,6 +79,22 @@ services:
       - ENV=PROD
     deploy:
       replicas: 1
+      placement:
+        constraints:
+          - node.role == manager 
+      update_config:
+        parallelism: 1
+        order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: curl -sS http://127.0.0.1:4004/ptm/api/healthcheck || echo 1
       interval: 30s
@@ -61,17 +104,28 @@ services:
   #      constraints:
   #        - node.role == manager 
 
-
-    restart: "always"
-    security_opt:
-      - no-new-privileges
-  
   dnmonster:
     image: amouat/dnmonster:1.0
     networks:
       - backend
     deploy:
       replicas: 2
+      placement:
+        constraints:
+          - node.role == manager 
+      update_config:
+        parallelism: 1
+        order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: curl -sS http://127.0.0.1:4004/ptm/api/healthcheck || echo 1
       interval: 30s
@@ -90,7 +144,20 @@ services:
       replicas: 1
       placement:
         constraints:
-          - node.role == manager
+          - node.role == manager 
+      update_config:
+        parallelism: 1
+        order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     healthcheck:
       test: curl -sS http://127.0.0.1:4004/ptm/api/healthcheck || echo 1
       interval: 30s
