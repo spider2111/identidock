@@ -50,12 +50,7 @@ services:
   #    placement:
   #      constraints:
   #        - node.role == manager 
-    healthcheck:
-      test: wget -qT5 --spider http://127.0.0.1:9090/system/health
-      interval: 10s
-      retries: 3
-      start_period: 60s
-      timeout: 5s
+
 
     restart: "always"
     security_opt:
@@ -68,12 +63,7 @@ services:
     deploy:
       replicas: 2
     
-    healthcheck:
-      test: wget -qT5 --spider http://127.0.0.1:8080/system/health
-      interval: 10s
-      retries: 3
-      start_period: 60s
-      timeout: 5s
+
    #   placement:
    #     constraints:
    #       - node.role == manager 
