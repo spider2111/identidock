@@ -33,9 +33,9 @@ services:
       - backend
     deploy:
       replicas: 2
-      placement:
-        constraints:
-          - node.role == manager 
+#      placement:
+#        constraints:
+#          - node.role == manager 
 
   identidock:
     image: spider2111/identidock-feature:test
@@ -45,9 +45,9 @@ services:
       - ENV=PROD
     deploy:
       replicas: 1
-      placement:
-        constraints:
-          - node.role == manager 
+  #    placement:
+  #      constraints:
+  #        - node.role == manager 
   
   dnmonster:
     image: amouat/dnmonster:1.0
@@ -55,9 +55,9 @@ services:
       - backend
     deploy:
       replicas: 2
-      placement:
-        constraints:
-          - node.role == manager 
+   #   placement:
+   #     constraints:
+   #       - node.role == manager 
   
   redis:
     image: redis:3.0
@@ -76,9 +76,9 @@ services:
     command: ["sleep", "1000000000"]
     deploy:
       replicas: 2
-      placement:
-        constraints:
-          - node.role == manager 
+   #   placement:
+   #     constraints:
+   #       - node.role == manager 
 networks:
   proxy:
     external: true
