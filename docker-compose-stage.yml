@@ -48,6 +48,16 @@ services:
   #    placement:
   #      constraints:
   #        - node.role == manager 
+    healthcheck:
+      test: wget -qT5 --spider http://127.0.0.1:80/system/health
+      interval: 10s
+      retries: 3
+      start_period: 60s
+      timeout: 5s
+
+    restart: "always"
+    security_opt:
+      - no-new-privileges
   
   dnmonster:
     image: amouat/dnmonster:1.0
@@ -55,6 +65,13 @@ services:
       - backend
     deploy:
       replicas: 2
+    
+    healthcheck:
+      test: wget -qT5 --spider http://127.0.0.1:80/system/health
+      interval: 10s
+      retries: 3
+      start_period: 60s
+      timeout: 5s
    #   placement:
    #     constraints:
    #       - node.role == manager 
@@ -68,6 +85,12 @@ services:
       placement:
         constraints:
           - node.role == manager
+    healthcheck:
+      test: wget -qT5 --spider http://127.0.0.1:80/system/health
+      interval: 10s
+      retries: 3
+      start_period: 60s
+      timeout: 5s
   
   drill:
     image: spider2111/alpine:driller
@@ -76,6 +99,12 @@ services:
     command: ["sleep", "1000000000"]
     deploy:
       replicas: 2
+    healthcheck:
+      test: wget -qT5 --spider http://127.0.0.1:80/system/health
+      interval: 10s
+      retries: 3
+      start_period: 60s
+      timeout: 5s
    #   placement:
    #     constraints:
    #       - node.role == manager 
