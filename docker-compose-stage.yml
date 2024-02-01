@@ -10,7 +10,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
     ports:
       - "80:80"
-      - "443"
+      - "443:443"
       - "8080:8080"
     networks:
       - proxy
@@ -71,4 +71,4 @@ networks:
   proxy:
     external: true
   identidock:
-    external: false
+    external: true
