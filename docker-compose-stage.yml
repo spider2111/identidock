@@ -35,6 +35,11 @@ services:
       - backend
     deploy:
       replicas: 2
+    healthcheck:
+      test: curl -sS http://127.0.0.1:4004/ptm/api/healthcheck || echo 1
+      interval: 30s
+      timeout: 3s
+      retries: 12
 #      placement:
 #        constraints:
 #          - node.role == manager 
@@ -47,6 +52,11 @@ services:
       - ENV=PROD
     deploy:
       replicas: 1
+    healthcheck:
+      test: curl -sS http://127.0.0.1:4004/ptm/api/healthcheck || echo 1
+      interval: 30s
+      timeout: 3s
+      retries: 12  
   #    placement:
   #      constraints:
   #        - node.role == manager 
@@ -62,7 +72,11 @@ services:
       - backend
     deploy:
       replicas: 2
-    
+    healthcheck:
+      test: curl -sS http://127.0.0.1:4004/ptm/api/healthcheck || echo 1
+      interval: 30s
+      timeout: 3s
+      retries: 12
 
    #   placement:
    #     constraints:
@@ -77,6 +91,11 @@ services:
       placement:
         constraints:
           - node.role == manager
+    healthcheck:
+      test: curl -sS http://127.0.0.1:4004/ptm/api/healthcheck || echo 1
+      interval: 30s
+      timeout: 3s
+      retries: 12
 
   
   drill:
