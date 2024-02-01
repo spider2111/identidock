@@ -61,7 +61,7 @@ services:
           - node.role == manager
   
   drill:
-    image: spider2111/alpine:drill
+    image: spider2111/alpine:driller
     networks:
       - identidock
     command: ["sleep", "1000000000"]
