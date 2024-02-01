@@ -30,14 +30,14 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
     networks:
       - proxy
-      - identidock
+      - backend
     deploy:
       replicas: 2
 
   identidock:
     image: spider2111/identidock-feature:test
     networks:
-      - identidock
+      - backend
     environment:
       - ENV=PROD
     deploy:
@@ -46,14 +46,14 @@ services:
   dnmonster:
     image: amouat/dnmonster:1.0
     networks:
-      - identidock
+      - backend
     deploy:
       replicas: 2
   
   redis:
     image: redis:3.0
     networks:
-      - identidock
+      - backend
     deploy:
       replicas: 1
       placement:
@@ -63,12 +63,12 @@ services:
   drill:
     image: spider2111/alpine:driller
     networks:
-      - identidock
+      - backend
     command: ["sleep", "1000000000"]
     deploy:
       replicas: 2
 networks:
   proxy:
     external: true
-  identidock:
-    external: true
+  backend:
+    external: false 
