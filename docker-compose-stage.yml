@@ -39,9 +39,9 @@ services:
     networks:
       - identidock
     environment:
-      ENV: PROD
+      - ENV=PROD
     deploy:
-      replicas: 2
+      replicas: 1
   
   dnmonster:
     image: amouat/dnmonster:1.0
