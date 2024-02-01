@@ -67,7 +67,7 @@ services:
       replicas: 2
     
     healthcheck:
-      test: wget -qT5 --spider http://127.0.0.1:80/system/health
+      test: wget -qT5 --spider http://127.0.0.1:9090/system/health
       interval: 10s
       retries: 3
       start_period: 60s
@@ -86,7 +86,7 @@ services:
         constraints:
           - node.role == manager
     healthcheck:
-      test: wget -qT5 --spider http://127.0.0.1:80/system/health
+      test: wget -qT5 --spider http://127.0.0.1:9090/system/health
       interval: 10s
       retries: 3
       start_period: 60s
@@ -100,7 +100,7 @@ services:
     deploy:
       replicas: 2
     healthcheck:
-      test: wget -qT5 --spider http://127.0.0.1:80/system/health
+      test: wget -qT5 --spider http://127.0.0.1:9090/system/health
       interval: 10s
       retries: 3
       start_period: 60s
