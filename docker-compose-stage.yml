@@ -76,7 +76,7 @@ services:
       - ENV=PROD
     deploy:
       replicas: 1
-      placement:
+    #  placement:
    #     constraints:
    #       - node.role == manager 
       update_config:
