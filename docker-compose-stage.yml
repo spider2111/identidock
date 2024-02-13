@@ -104,7 +104,7 @@ services:
       - backend
     deploy:
       replicas: 2
-      placement:
+    #  placement:
     #    constraints:
     #      - node.role == manager 
       update_config:
