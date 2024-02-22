@@ -37,14 +37,14 @@ services:
     image: spider2111/proxy:0.1
     environment:
       - NGINX_PROXY=http://identidock:9090  ##
-      - NGINX_HOST=identidock           ## I need to change this part. Maybe with Ansible (Jinja template) 
+      - NGINX_HOST=identidock_nginx           ## I need to change this part. Maybe with Ansible (Jinja template) 
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
     networks:
       - proxy
       - backend
     deploy:
-      replicas: 4
+      replicas: 5
       update_config:
         parallelism: 1
         order: start-first
