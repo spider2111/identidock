@@ -44,10 +44,7 @@ services:
       - proxy
       - backend
     deploy:
-      replicas: 2
-      placement:  
-        constraints:
-          - node.role == manager
+      replicas: 4
       update_config:
         parallelism: 1
         order: start-first
