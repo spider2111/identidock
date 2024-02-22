@@ -37,7 +37,7 @@ services:
     image: spider2111/proxy:0.1
     environment:
       - NGINX_PROXY=http://identidock:9090  ##
-      - NGINX_HOST=172.17.88.139            ## I need to change this part. Maybe with Ansible (Jinja template) 
+      - NGINX_HOST=identidock           ## I need to change this part. Maybe with Ansible (Jinja template) 
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
     networks:
